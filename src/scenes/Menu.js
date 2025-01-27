@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
         this.load.image('rocket', './assets/rocket.png')
         this.load.image('spaceship', './assets/spaceship.png')
         this.load.image('starfield', './assets/starfield.png')
+        this.load.image('backdrop', './assets/backdrop.png')
 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {
@@ -43,6 +44,10 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+
+        // place the backdrop
+        this.backdrop = this.add.image()
+
         // display menu text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5)

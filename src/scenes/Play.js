@@ -30,7 +30,18 @@ class Play extends Phaser.Scene {
 
         // initialize score
         this.p1Score = 0
-        // display score
+        // set up configs for HUD
+        let nameConfig = {
+            fontFamily: 'Courier',
+            fontSize: '14px',
+            color: '#000000',
+            align: 'center',
+            padding: {
+                top: 2,
+                bottom: 2,
+            },
+            fixedWidth: 100
+        }
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -43,7 +54,15 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig)
+        // SCORE
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*3, this.p1Score, scoreConfig)
+        this.nameScoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*1.25, 'SCORE', nameConfig)
+        // TIME
+        this.scoreCenter = this.add.text(game.config.width/2 - borderUISize - borderPadding, borderUISize + borderPadding*3, this.p1Score, scoreConfig)
+        this.nameScoreCenter = this.add.text(game.config.width/2 - borderUISize - borderPadding, borderUISize + borderPadding*1.25, 'TIME', nameConfig)
+        // HISCORE
+        this.scoreRight = this.add.text(game.config.width - borderUISize*3.5 - borderPadding*3.5, borderUISize + borderPadding*3, this.p1Score, scoreConfig)
+        this.nameScoreRight = this.add.text(game.config.width - borderUISize*3.5 - borderPadding*3.5, borderUISize + borderPadding*1.25, 'HISCORE', nameConfig)
 
         // GAME OVER flag
         this.gameOver = false

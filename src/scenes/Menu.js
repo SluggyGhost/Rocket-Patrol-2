@@ -46,7 +46,7 @@ class Menu extends Phaser.Scene {
         }
 
         // place the backdrop
-        this.backdrop = this.add.image()
+        this.backdrop = this.add.image(game.config.width/2, game.config.height/2, 'backdrop')
 
         // display menu text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5)

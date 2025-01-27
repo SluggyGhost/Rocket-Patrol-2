@@ -58,16 +58,25 @@ class Play extends Phaser.Scene {
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*3, this.p1Score, scoreConfig)
         this.nameScoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*1.25, 'SCORE', nameConfig)
         // TIME
-        this.scoreCenter = this.add.text(game.config.width/2 - borderUISize - borderPadding, borderUISize + borderPadding*3, this.p1Score, scoreConfig)
+        this.timeRemaining = game.settings.gameTimer/1000
+        this.scoreCenter = this.add.text(game.config.width/2 - borderUISize - borderPadding, borderUISize + borderPadding*3, this.timeRemaining, scoreConfig)
         this.nameScoreCenter = this.add.text(game.config.width/2 - borderUISize - borderPadding, borderUISize + borderPadding*1.25, 'TIME', nameConfig)
         // HISCORE
         this.scoreRight = this.add.text(game.config.width - borderUISize*3.5 - borderPadding*3.5, borderUISize + borderPadding*3, highScore, scoreConfig)
         this.nameScoreRight = this.add.text(game.config.width - borderUISize*3.5 - borderPadding*3.5, borderUISize + borderPadding*1.25, 'HISCORE', nameConfig)
 
+        // Clock Event
+        this.timerEvent = this.time.addEvent({
+            delay: 1000,    // 1 second
+            callback: this.updateTime,
+            callbackScope: this,
+            loop: true, // Keep repeating
+        })
+
         // GAME OVER flag
         this.gameOver = false
 
-        // play clock
+        // Game over message
         scoreConfig.fixedWidth = 0
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5)
@@ -76,7 +85,7 @@ class Play extends Phaser.Scene {
         }, null, this)
     }
 
-    update() {
+    update() {    
         // Update high score
         if(this.p1Score > highScore) {
             highScore = this.p1Score
@@ -112,6 +121,17 @@ class Play extends Phaser.Scene {
         if(this.checkCollision(this.p1Rocket, this.ship01)) {
             this.p1Rocket.reset()
             this.shipExplode(this.ship01)
+        }
+    }
+
+    updateTime() {
+        // Update clock
+        if (this.timeRemaining > 0) {
+            this.timeRemaining--;
+            this.scoreCenter.text = this.timeRemaining;
+            if (this.timeRemaining === 0) {
+                this.timerEvent.remove();   // Stops the timer when it hits 0
+            }
         }
     }
 

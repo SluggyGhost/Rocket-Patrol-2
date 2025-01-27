@@ -12,6 +12,7 @@
  * > Implement a new timing/scoring mechanism that adds time to the clock
  *      for successful hits and subtracts time for misses (5)
  * SOURCES:
+ * > ChatGPT (for the clock display)
  *****************************************************************************/
 let config = {
     type: Phaser.AUTO,

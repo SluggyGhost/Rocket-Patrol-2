@@ -21,6 +21,7 @@ let config = {
 }
 
 let game = new Phaser.Game(config)
+let highScore = 0
 
 // reserve keyboard bindings
 let keyFIRE, keyRESET, keyLEFT, keyRIGHT

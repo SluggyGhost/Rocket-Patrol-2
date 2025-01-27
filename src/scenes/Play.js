@@ -61,7 +61,7 @@ class Play extends Phaser.Scene {
         this.scoreCenter = this.add.text(game.config.width/2 - borderUISize - borderPadding, borderUISize + borderPadding*3, this.p1Score, scoreConfig)
         this.nameScoreCenter = this.add.text(game.config.width/2 - borderUISize - borderPadding, borderUISize + borderPadding*1.25, 'TIME', nameConfig)
         // HISCORE
-        this.scoreRight = this.add.text(game.config.width - borderUISize*3.5 - borderPadding*3.5, borderUISize + borderPadding*3, this.p1Score, scoreConfig)
+        this.scoreRight = this.add.text(game.config.width - borderUISize*3.5 - borderPadding*3.5, borderUISize + borderPadding*3, highScore, scoreConfig)
         this.nameScoreRight = this.add.text(game.config.width - borderUISize*3.5 - borderPadding*3.5, borderUISize + borderPadding*1.25, 'HISCORE', nameConfig)
 
         // GAME OVER flag
@@ -77,6 +77,12 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        // Update high score
+        if(this.p1Score > highScore) {
+            highScore = this.p1Score
+            this.scoreRight.text = highScore
+        }
+
         // check key input for restart
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
             this.scene.restart()

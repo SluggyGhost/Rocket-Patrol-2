@@ -4,8 +4,9 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        // place tile sprite
-        this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0)
+        // place tile sprites
+        this.starfield1 = this.add.tileSprite(0, 0, 640, 480, 'starfield1').setOrigin(0, 0)
+        this.starfield2 = this.add.tileSprite(0, 0, 640, 480, 'starfield2').setOrigin(0, 0)
         // green UI background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0,0)
         // white borders
@@ -100,7 +101,9 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene")
         }
         
-        this.starfield.tilePositionX -= 4
+        // Move the background
+        this.starfield1.tilePositionX -= 1  // Farthest layer (slowest)
+        this.starfield2.tilePositionX -= 2  // Closest layer (fastest)
         
         if(!this.gameOver){
             this.p1Rocket.update()  // update rocket sprite

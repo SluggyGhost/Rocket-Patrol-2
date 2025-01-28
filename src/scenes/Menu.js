@@ -3,11 +3,14 @@ class Menu extends Phaser.Scene {
         super("menuScene")
     }
 
+    // load everything
     preload() {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png')
         this.load.image('spaceship', './assets/spaceship.png')
-        this.load.image('starfield', './assets/starfield.png')
+        this.load.image('starfield1', './assets/starfield1.png')
+        this.load.image('starfield2', './assets/starfield2.png')
+        this.load.image('starfield3', './assets/starfield3.png')
         this.load.image('backdrop', './assets/backdrop.png')
 
         // load spritesheet

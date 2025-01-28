@@ -8,7 +8,8 @@
  * > Display the time remaining (in seconds) on the screen (3)
  * > Create a new title sceen (e.g., new artwork, typography, layout) (3)
  * > Implement parallax scrolling for the background (3)
- * > Implement an alternating two-player mode (5)
+ * > Create a new enemty Spaceship type (w/ new artwork)  that's smaller,
+ *      moves faster, and is worth more points (5)
  * > Implement a new timing/scoring mechanism that adds time to the clock
  *      for successful hits and subtracts time for misses (5)
  * SOURCES:

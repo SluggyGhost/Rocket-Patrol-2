@@ -67,7 +67,6 @@ class Menu extends Phaser.Scene {
         menuConfig.backgroundColor = '#005000'
         menuConfig.color = '#000'
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*2 + borderPadding, 'Hold down (F) for 2-player mode', menuConfig).setOrigin(0.5)
 
         // define keys
         keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
@@ -76,46 +75,24 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
-        if(keyFIRE.isDown) {
-            // two players
-            if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-                // easy mode
-                game.settings = {
-                    spaceshipSpeed: 3,
-                    gameTimer: 60000
-                }
-                this.sound.play('sfx-select')
-                this.scene.start('play2Scene')
+        // single player
+        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            // easy mode
+            game.settings = {
+                spaceshipSpeed: 3,
+                gameTimer: 60000
             }
-            if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-                // hard mode
-                game.settings = {
-                    spaceshipSpeed: 4,
-                    gameTimer: 45000
-                }
-                this.sound.play('sfx-select')
-                this.scene.start('play2Scene')
+            this.sound.play('sfx-select')
+            this.scene.start('playScene')
+        }
+        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
+            // hard mode
+            game.settings = {
+                spaceshipSpeed: 4,
+                gameTimer: 45000
             }
-        } else {
-            // single player
-            if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-                // easy mode
-                game.settings = {
-                    spaceshipSpeed: 3,
-                    gameTimer: 60000
-                }
-                this.sound.play('sfx-select')
-                this.scene.start('playScene')
-            }
-            if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-                // hard mode
-                game.settings = {
-                    spaceshipSpeed: 4,
-                    gameTimer: 45000
-                }
-                this.sound.play('sfx-select')
-                this.scene.start('playScene')
-            }
+            this.sound.play('sfx-select')
+            this.scene.start('playScene')
         }
     }
 }

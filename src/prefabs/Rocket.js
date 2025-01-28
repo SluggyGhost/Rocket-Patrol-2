@@ -7,6 +7,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
         this.isFiring = false       // track rocket's firing status
         this.moveSpeed = 2          // rocket speed in pixels/frame
         this.sfxShot = scene.sound.add('sfx-shot')
+        this.parentScene = scene    // reference to the parent scene
     }
 
     update() {
@@ -31,6 +32,9 @@ class Rocket extends Phaser.GameObjects.Sprite {
         if(this.y <= borderUISize * 3 + borderPadding) {
             this.isFiring = false
             this.y = game.config.height - borderUISize - borderPadding
+
+            // Notify parent scene of the missed shot
+            this.parentScene.onMissedShot()
         }
     }
 

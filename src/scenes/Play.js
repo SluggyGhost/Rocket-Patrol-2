@@ -77,16 +77,17 @@ class Play extends Phaser.Scene {
         // GAME OVER flag
         this.gameOver = false
 
-        // Game over message
-        scoreConfig.fixedWidth = 0
-        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5)
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5)
-            this.gameOver = true
-        }, null, this)
+        // // Game over message
+        // scoreConfig.fixedWidth = 0
+        // this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
+        //     this.scoreCenter.text = '0'
+        //     this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5)
+        //     this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5)
+        //     this.gameOver = true
+        // }, null, this)
     }
 
-    update() {    
+    update() {
         // Update high score
         if(this.p1Score > highScore) {
             highScore = this.p1Score
@@ -128,11 +129,6 @@ class Play extends Phaser.Scene {
             this.shipExplode(this.ship01)
             this.timeRemaining += 3;
         }
-
-        // // reduce time on miss
-        // if(this.p1Rocket.y <= borderUISize * 3 + borderPadding){
-        //     this.timeRemaining -= 2;
-        // }
     }
 
     updateTime() {
@@ -140,8 +136,21 @@ class Play extends Phaser.Scene {
         if (this.timeRemaining > 0) {
             this.timeRemaining--;
             this.scoreCenter.text = this.timeRemaining;
-            if (this.timeRemaining === 0) {
-                this.timerEvent.remove();   // Stops the timer when it hits 0
+
+            // Check if time runs out
+            if (this.timeRemaining <= 0) {
+                this.timeRemaining = 0;
+                this.gameOver = true;
+                this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', {
+                    fontFamily: 'Courier',
+                    fontSize: '28px',
+                    color: '#843605',
+                }).setOrigin(0.5);
+                this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← for Menu', {
+                    fontFamily: 'Courier',
+                    fontSize: '28px',
+                    color: '#843605',
+                }).setOrigin(0.5);
             }
         }
     }
@@ -171,5 +180,14 @@ class Play extends Phaser.Scene {
         this.scoreLeft.text = this.p1Score
 
         this.sound.play('sfx-explosion')
+    }
+
+    // Method to handle missed shots
+    onMissedShot() {
+        this.timeRemaining -= 2;    // Decrease time on missed shot
+        if (this.timeRemaining < 0) {
+            this.timeRemaining = 0; // Ensure time does not go negative
+        }
+        this.scoreCenter.text = this.timeRemaining; // Update timer display
     }
 }

@@ -12,8 +12,11 @@
  * > Implement a new timing/scoring mechanism that adds time to the clock
  *      for successful hits and subtracts time for misses (5)
  * SOURCES:
- * > ChatGPT (for the clock display)
+ * > ChatGPT
+ *      - clock display:
  *      https://chatgpt.com/share/6797f85c-27e8-800c-acc9-31f5d0f924b8
+ *      - parallax background:
+ *      https://chatgpt.com/share/679846cd-b624-800c-aa9d-f62ab9e07379
  * 
  *****************************************************************************/
 let config = {

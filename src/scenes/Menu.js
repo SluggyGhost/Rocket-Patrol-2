@@ -8,9 +8,9 @@ class Menu extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png')
         this.load.image('spaceship', './assets/spaceship.png')
+        this.load.image('goldship', './assets/smallship.png')
         this.load.image('starfield1', './assets/starfield1.png')
         this.load.image('starfield2', './assets/starfield2.png')
-        this.load.image('starfield3', './assets/starfield3.png')
         this.load.image('backdrop', './assets/backdrop.png')
 
         // load spritesheet
@@ -79,6 +79,7 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             // easy mode
             game.settings = {
+                goldshipSpeed: 3,
                 spaceshipSpeed: 3,
                 gameTimer: 60000
             }
@@ -88,6 +89,7 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
             // hard mode
             game.settings = {
+                goldshipSpeed: 5,
                 spaceshipSpeed: 4,
                 gameTimer: 45000
             }

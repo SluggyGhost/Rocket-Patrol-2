@@ -13,6 +13,8 @@
  *      for successful hits and subtracts time for misses (5)
  * SOURCES:
  * > ChatGPT (for the clock display)
+ *      https://chatgpt.com/share/6797f85c-27e8-800c-acc9-31f5d0f924b8
+ * 
  *****************************************************************************/
 let config = {
     type: Phaser.AUTO,
